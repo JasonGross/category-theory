@@ -257,7 +257,7 @@ Proof.
     rewrite map_map.
     clear -Trie_map_flatten.
     induction (vec t0); simpl; auto.
-    rewrite IHt1.
+    rewrite IHv.
     now rewrite Trie_map_flatten.
 Qed.
 
@@ -286,7 +286,7 @@ Next Obligation.
   proper.
   rewrite !Trie_map_flatten.
   induction (vec x1); simpl; auto.
-  now rewrite H, IHt.
+  now rewrite H, IHv.
 Qed.
 Next Obligation.
   rewrite Trie_map_flatten.
