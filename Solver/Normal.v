@@ -235,7 +235,7 @@ Proof.
   generalize dependent c.
   generalize dependent d.
   generalize dependent t2.
-  unfold termD; destruct t1; simpl; intros.
+  unfold termD; destruct t1; simpl; [intros t2 d c f H0 | intros t2 d c0 f H0].
   - eexists _, _, f.
     now split; cat.
   - generalize dependent c0.
@@ -265,7 +265,7 @@ Theorem from_morphism_to_morphism {d c} {t : Term} {f} :
 Proof.
   generalize dependent c.
   generalize dependent d.
-  unfold termD; induction t; simpl; intros; desh.
+  unfold termD; induction t as [|a|t1 IHt1 t2 IHt2]; simpl; intros; desh.
   - pose proof (from_morphism_app Heqo); desh.
     specialize (IHt2 _ _ x1).
     rewrite e in IHt2; clear e.
@@ -288,7 +288,7 @@ Proof.
   generalize dependent c.
   generalize dependent d.
   generalize dependent t2.
-  unfold termD; destruct t1; simpl; intros; desh.
+  unfold termD; destruct t1; simpl; [intros t2 d h c g H0 H1 | intros t2 d h c0 g H0 H1]; desh.
   generalize dependent c0.
   induction c; simpl; intros; desh.
   - destruct t2; simpl in *; desh.
@@ -314,7 +314,7 @@ Theorem from_morphism_to_morphism_r {d c} {t : Term} {f} :
 Proof.
   generalize dependent c.
   generalize dependent d.
-  unfold termD; induction t; simpl; intros; desh.
+  unfold termD; induction t as [|a|t1 IHt1 t2 IHt2]; simpl; intros; desh.
   - specialize (IHt2 _ _ h).
     rewrite Heqo in IHt2; clear Heqo.
     specialize (IHt1 _ _ h0).

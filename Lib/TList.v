@@ -249,7 +249,7 @@ Next Obligation.
     destruct (eq_dec j0 _); [|contradiction].
     subst.
     rewrite EqDec.peq_dec_refl.
-    destruct X.
+    destruct X as [e t].
     split.
     + now apply Equivalence_Symmetric.
     + apply IHx, t.
@@ -300,7 +300,7 @@ Next Obligation.
     rewrite tlist_equiv_equation_4 in *.
     destruct (eq_dec j0 j1); [|contradiction].
     subst.
-    destruct X.
+    destruct X as [e t0].
     split; auto.
     apply IHx.
     + exact t0.

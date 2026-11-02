@@ -72,7 +72,7 @@ Definition T_swap {S : Signature} : Term S 2 2 :=
 Definition T_inj {S T : Signature} (inc : SubSig S T)
                  {m n : nat} (t : Term S m n) : Term T m n.
 Proof.
-  induction t.
+  induction t as [n|m n|m n p t1 IHt1 t2 IHt2|m1 n1 m2 n2 t1 IHt1 t2 IHt2|m n s].
   - exact (T_id _).
   - exact (T_braid _ _).
   - exact (T_comp IHt1 IHt2).

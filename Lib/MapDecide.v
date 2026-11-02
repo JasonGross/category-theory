@@ -302,7 +302,7 @@ Lemma formula_denote_subst_formula env v v' t :
   term_denote env v = term_denote env v'
     → formula_denote env (subst_formula t v v') = formula_denote env t.
 Proof.
-  induction t; simpl; auto; intros.
+  induction t as [| |t t0 t1 m|t1 IHt1 t2 IHt2]; simpl; auto; intros.
   - rewrite map_expr_denote_subst_map_expr,
             !term_denote_subst_term; auto.
   - rewrite IHt1, IHt2; auto.
@@ -385,7 +385,7 @@ Next Obligation.
 Defined.
 Next Obligation.
   match goal with [ H : M.MapsTo _ _ _ → _ |- _ ] => apply H; clear H end.
-  induction m; simpl in *; auto.
+  induction m as [|t0 t1 t2 m IHm]; simpl in *; auto.
   destruct (conflicted x t0) eqn:?;
   destruct (conflicted y t1) eqn:?;
   destruct (conflicted f t2) eqn:?;
@@ -414,7 +414,7 @@ Lemma map_contains_MapsTo env x y f m :
   Some f = map_contains env x y m
     → M.MapsTo (x, y) (term_denote env f) (map_expr_denote env m).
 Proof.
-  induction m; simpl; intros.
+  induction m as [|t t0 t1 m IHm]; simpl; intros.
   - discriminate.
   - simplify_maps.
     destruct ((x =? term_denote env t)%N &&

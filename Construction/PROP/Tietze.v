@@ -340,7 +340,7 @@ Lemma interp_copair_inl {S T : Signature} {P : PROP}
   interp P (Sum_Sig S T) (copair_val v w) (T_map sig_inl t)
     ≈ interp P S v t.
 Proof.
-  induction t; cbn [T_map T_subst interp].
+  induction t as [n|m n|m n p t1 IHt1 t2 IHt2|m1 n1 m2 n2 t1 IHt1 t2 IHt2|m n s]; cbn [T_map T_subst interp].
   - reflexivity.
   - reflexivity.
   - rewrite <- IHt1, <- IHt2; reflexivity.
@@ -353,7 +353,7 @@ Lemma interp_copair_inr {S T : Signature} {P : PROP}
   interp P (Sum_Sig S T) (copair_val v w) (T_map sig_inr t)
     ≈ interp P T w t.
 Proof.
-  induction t; cbn [T_map T_subst interp].
+  induction t as [n|m n|m n p t1 IHt1 t2 IHt2|m1 n1 m2 n2 t1 IHt1 t2 IHt2|m n s]; cbn [T_map T_subst interp].
   - reflexivity.
   - reflexivity.
   - rewrite <- IHt1, <- IHt2; reflexivity.

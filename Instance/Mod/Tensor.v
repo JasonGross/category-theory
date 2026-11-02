@@ -740,7 +740,7 @@ Lemma tensor_hom_ext {R : RingObject} {V V' W : RModObject R}
       cmon_map (rm_hom f) (mt_gen v w) ≈ cmon_map (rm_hom g) (mt_gen v w)) →
   ∀ t : MTerm V V', cmon_map (rm_hom f) t ≈ cmon_map (rm_hom g) t.
 Proof.
-  intros Hgen t; induction t.
+  intros Hgen t; induction t as [c c0| |t1 IHt1 t2 IHt2|t IHt|c t IHt].
   - exact (Hgen c c0).
   - exact (transitivity (cmon_map_zero (rm_hom f))
              (symmetry (cmon_map_zero (rm_hom g)))).

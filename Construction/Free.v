@@ -213,7 +213,7 @@ Program Instance Mor_Setoid {x y} : Setoid (Mor x y) := {
 Lemma morD_sound `{t : Mor x y} :
   morD t ≈ composition (morDA t).
 Proof.
-  induction t; simpl; cat.
+  induction t as [x|x y f|x y z t1 IHt1 t2 IHt2]; simpl; cat.
   rewrite IHt1, IHt2; simpl.
   now rewrite composition_tapp.
 Qed.

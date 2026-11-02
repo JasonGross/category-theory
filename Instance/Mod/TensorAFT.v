@@ -1018,7 +1018,7 @@ Definition QMod_gen (Rq : MTerm V V' → MTerm V V' → Prop)
 Theorem QMod_gen_spanning (Rq : MTerm V V' → MTerm V V' → Prop)
   (HRq : IsCongruence V V' Rq) : RBilinearSpanning (QMod_gen Rq HRq).
 Proof.
-  intro t; induction t.
+  intro t; induction t as [c c0| |t1 IHt1 t2 IHt2|t IHt|c t IHt].
   - refine (mgen_base (rbl_image (QMod_gen Rq HRq)) _ _).
     exists c, c0; reflexivity.
   - exact (mgen_zero (rbl_image (QMod_gen Rq HRq))).

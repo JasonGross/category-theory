@@ -775,7 +775,7 @@ End SpanningEquivalence.
 Theorem tensor_gen_spanning {R : RingObject} (V V' : RModObject R) :
   RBilinearSpanning (@tensor_gen R V V').
 Proof.
-  intro t; induction t.
+  intro t; induction t as [c c0| |t1 IHt1 t2 IHt2|t IHt|c t IHt].
   - refine (mgen_base (rbl_image (@tensor_gen R V V')) _ _).
     exists c, c0; reflexivity.
   - exact (mgen_zero (rbl_image (@tensor_gen R V V'))).

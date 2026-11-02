@@ -443,7 +443,7 @@ Fixpoint fp_eval (s : FPTerm) : carrier (mon_ob Q) :=
 Lemma fp_eval_resp : ∀ s t, fp_eq s t → fp_eval s ≈ fp_eval t.
 Proof.
   intros s t H.
-  induction H; simpl.
+  induction H as [a b e|a b e|s s' t t' H IHfp_eq1 H0 IHfp_eq2|s t H IHfp_eq|s t u H IHfp_eq1 H0 IHfp_eq2|s t u|s|s|a b|a b| |]; simpl.
   - now apply mon_fun_resp.
   - now apply mon_fun_resp.
   - now apply mon_mul_resp.

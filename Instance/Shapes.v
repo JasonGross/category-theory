@@ -250,13 +250,13 @@ Fixpoint Trie_map {s : Shape} `(f : a → b) (x : Trie a s) : Trie b s :=
 Fixpoint Trie_map_flatten `(f : a → b) `(t : Trie a s) :
   vec (Trie_map f t) = map f (vec t).
 Proof.
-  induction t; try (simpl; reflexivity); simpl.
+  induction t as [a|a a0|a x y t1 IHt1 t2 IHt2|a x y z t H t0 IHt]; try (simpl; reflexivity); simpl.
   - rewrite map_append.
     now rewrite IHt1, IHt2.
   - rewrite map_concat.
     rewrite map_map.
     clear -Trie_map_flatten.
-    induction (vec t0); simpl; auto.
+    induction (vec t0) as [|h n t1 IHt1]; simpl; auto.
     rewrite IHt1.
     now rewrite Trie_map_flatten.
 Qed.
@@ -285,7 +285,7 @@ Program Instance Trie_Functor (s : Shape) : Coq ⟶ Sets := {|
 Next Obligation.
   proper.
   rewrite !Trie_map_flatten.
-  induction (vec x1); simpl; auto.
+  induction (vec x1) as [|h n t IHt]; simpl; auto.
   now rewrite H, IHt.
 Qed.
 Next Obligation.

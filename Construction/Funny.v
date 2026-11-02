@@ -160,7 +160,7 @@ Fixpoint fapp {c1 d1 c2 d2} (t : FunHom c1 d1 c2 d2) :
 
 Lemma fapp_nil_r {c1 d1 c2 d2} (t : FunHom c1 d1 c2 d2) : fapp t fnil = t.
 Proof.
-  induction t; simpl.
+  induction t as [c d|c1 c2 d1 f c3 d3 t IHt|c1 d1 d2 g c3 d3 t IHt]; simpl.
   - reflexivity.
   - now rewrite IHt.
   - now rewrite IHt.
@@ -170,7 +170,7 @@ Lemma fapp_assoc {c1 d1 c2 d2 c3 d3 c4 d4} (t : FunHom c1 d1 c2 d2)
       (u : FunHom c2 d2 c3 d3) (v : FunHom c3 d3 c4 d4) :
   fapp t (fapp u v) = fapp (fapp t u) v.
 Proof.
-  revert u v; induction t; simpl; intros.
+  revert u v; induction t as [c d|c1 c2 d1 f c0 d0 t IHt|c1 d1 d2 g c0 d0 t IHt]; simpl; intros.
   - reflexivity.
   - now rewrite IHt.
   - now rewrite IHt.
@@ -233,7 +233,7 @@ Qed.
 Lemma fapp_feq_r {c1 d1 c2 d2 c3 d3} (t : FunHom c1 d1 c2 d2)
       {u u' : FunHom c2 d2 c3 d3} (E : feq u u') : feq (fapp t u) (fapp t u').
 Proof.
-  revert u u' E; induction t; simpl; intros u u' E.
+  revert u u' E; induction t as [c d|c1 c2 d1 f c0 d0 t IHt|c1 d1 d2 g c0 d0 t IHt]; simpl; intros u u' E.
   - exact E.
   - apply feq_consL; [ reflexivity | exact (IHt _ _ E) ].
   - apply feq_consR; [ reflexivity | exact (IHt _ _ E) ].
@@ -428,7 +428,7 @@ Lemma ffold_app (S : SepFunctorial)
   (t : FunHom c1 d1 c2 d2) (u : FunHom c2 d2 c3 d3) :
   ffold S (fapp t u) ≈ ffold S u ∘ ffold S t.
 Proof.
-  revert u; induction t; simpl; intros u.
+  revert u; induction t as [c d|c1 c2 d1 f c0 d0 t IHt|c1 d1 d2 g c0 d0 t IHt]; simpl; intros u.
   - symmetry; apply id_right.
   - etransitivity;
       [ apply compose_respects; [ apply IHt | reflexivity ]
@@ -527,7 +527,7 @@ Lemma ffold_ext {C D E : Category} {h : C → D → E} (S S' : SepFunctorial h)
   {c1 : C} {d1 : D} {c2 : C} {d2 : D} (t : FunHom c1 d1 c2 d2) :
   ffold S t ≈ ffold S' t.
 Proof.
-  induction t; simpl.
+  induction t as [c d|c1 c2 d1 f c3 d3 t IHt|c1 d1 d2 g c3 d3 t IHt]; simpl.
   - reflexivity.
   - apply compose_respects; [ exact IHt | apply el ].
   - apply compose_respects; [ exact IHt | apply er ].

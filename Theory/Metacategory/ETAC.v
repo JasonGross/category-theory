@@ -412,7 +412,7 @@ Lemma holds_env_ext {C : Category} (p : formula) :
   (∀ n, ρ n = ρ' n) → (∀ n, σ n = σ' n) →
   holds ρ σ p → holds ρ' σ' p.
 Proof.
-  induction p; simpl; intros ρ ρ' σ σ' Hρ Hσ H.
+  induction p as [t| | |p1 IHp1 p2 IHp2|p1 IHp1 p2 IHp2|p1 IHp1 p2 IHp2|p IHp|p IHp|p IHp|p IHp|p IHp]; simpl; intros ρ ρ' σ σ' Hρ Hσ H.
   - destruct t; simpl in *;
     repeat rewrite <- (Hσ _); repeat rewrite <- (Hρ _); exact H.
   - exact H.
@@ -483,7 +483,7 @@ Lemma holds_agree {C : Category} (p : formula) :
   (∀ n, (n < ka)%nat → σ n = σ' n) →
   holds ρ σ p → holds ρ' σ' p.
 Proof.
-  induction p; simpl; intros ko ka ρ ρ' σ σ' Hc Hρ Hσ H.
+  induction p as [t| | |p1 IHp1 p2 IHp2|p1 IHp1 p2 IHp2|p1 IHp1 p2 IHp2|p IHp|p IHp|p IHp|p IHp|p IHp]; simpl; intros ko ka ρ ρ' σ σ' Hc Hρ Hσ H.
   - destruct t; cbn in Hc; simpl in *.
     + destruct Hc as [Hf Ha].
       rewrite <- (Hσ f Hf), <- (Hρ a Ha); exact H.
@@ -599,7 +599,7 @@ with holds_dual_from {C : Category} (p : formula) :
   ∀ (ρ : nat → obj[C]) (σ : nat → Arr C),
   @holds (C^op) ρ (op_env σ) p → holds ρ σ (dual p).
 Proof.
-  - induction p; simpl; intros ρ σ H.
+  - induction p as [t| | |p1 IHp1 p2 IHp2|p1 IHp1 p2 IHp2|p1 IHp1 p2 IHp2|p IHp|p IHp|p IHp|p IHp|p IHp]; simpl; intros ρ σ H.
     + destruct t; simpl in *; unfold op_env, op_arr; simpl.
       * exact H.
       * exact H.
@@ -627,7 +627,7 @@ Proof.
       refine (holds_env_ext p _ _ _ _ (fun n => eq_refl) _
                 (IHp _ (acons s σ) H)).
       intros [|n]; simpl; reflexivity.
-  - induction p; simpl; intros ρ σ H.
+  - induction p as [t| | |p1 IHp1 p2 IHp2|p1 IHp1 p2 IHp2|p1 IHp1 p2 IHp2|p IHp|p IHp|p IHp|p IHp|p IHp]; simpl; intros ρ σ H.
     + destruct t; simpl in *; unfold op_env, op_arr in H; simpl in H.
       * exact H.
       * exact H.
